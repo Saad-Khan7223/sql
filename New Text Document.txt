@@ -1,0 +1,67 @@
+CREATE DATABASE IF NOT EXISTS  aptech;
+DROP DATABASE IF  EXISTS  aptech;
+SHOW DATABASES;
+
+/////////// Table//////////
+
+
+///////////CREATE///////////
+CREATE TABLE IF NOT EXISTS products (product_id INT UNSIGNED AUTO_INCREMENT NOT NUll, product_code CHAR(5) NOT NULL,product_name VARCHAR(255) NOT NULL,product_quantity INT UNSIGNED DEFAULT 0  NOT NULL, product_price DECIMAL(10,2) DEFAULT 999.99 NOT NULL, PRIMARY KEY (product_id));
+
+////////////INSERT/////////
+INSERT INTO products (product_id,product_code,product_name,product_quantity,product_price) VALUES (101,"mark","redMarker",1500,15);
+
+INSERT INTO products VALUES (NUll,"mark","redMarker",1500,15),(NUll,"penc","pencil2B",2000,10),(NUll,"mark","blackMarker",500,20),(NUll,"penc","pencil2H",1500,25);
+
+
+INSERT INTO products (product_code,product_name)values ("mark","greenMarker");
+
+INSERT INTO products ('product_code','product_name')values ("mark","greenMarker");
+
+/////// SELECT////////////
+
+SELECT * FROM `products`;
+
+SELECT products.product_id, products.product_name FROM products;
+
+SELECT products.product_id, products.product_name FROM products WHERE products.product_id<=103;
+
+SELECT products.product_id, products.product_name FROM products WHERE products.product_id>=103;
+
+SELECT products.product_id, products.product_name FROM products WHERE products.product_name="redMarker";
+
+SELECT products.product_id, products.product_name FROM products WHERE products.product_name!="redMarker";
+
+
+//////Like/////
+
+SELECT * FROM products WHERE product_name LIKE '%marker';
+SELECT * FROM products WHERE products.product_name LIKE '%en%r';
+SELECT * FROM products WHERE products.product_name NOT LIKE 'r_d%';
+
+SELECT * FROM products WHERE products.product_name NOT LIKE 'r_d%' AND products.product_code="mark";
+
+////////IN NOT IN////////////
+
+
+SELECT * FROM products WHERE products.product_name="redMarker" OR products.product_name="BlueMarker" OR products.product_name="greenMarker" ;
+
+SELECT * FROM products WHERE products.product_name IN('redMarker','greenmarker','bluemarker');
+
+SELECT * FROM products WHERE products.product_name NOT IN('redMarker','greenmarker','bluemarker');
+
+
+////////IS NULL  IS NOT NULL////////////
+SELECT * FROM products WHERE products.product_code IS NULL;
+SELECT * FROM products WHERE products.product_code IS NOT NULL;
+
+////////ORDER BY and Limit////////////
+
+SELECT * FROM products WHERE products.product_name LIKE '_e%' ORDER BY products.product_code DESC;
+
+SELECT * FROM products WHERE products.product_name LIKE '_e%' ORDER BY products.product_code ASC;
+
+
+SELECT * FROM products WHERE products.product_name LIKE '_e%' ORDER BY products.product_code ASC LIMIT 2;
+
+SELECT * FROM products LIMIT 2,3;
