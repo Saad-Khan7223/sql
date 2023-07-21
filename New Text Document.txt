@@ -65,3 +65,29 @@ SELECT * FROM products WHERE products.product_name LIKE '_e%' ORDER BY products.
 SELECT * FROM products WHERE products.product_name LIKE '_e%' ORDER BY products.product_code ASC LIMIT 2;
 
 SELECT * FROM products LIMIT 2,3;
+
+
+///////Alias use for only display purpose/////////////
+
+SELECT products.product_id as "ID" , products.product_name as "Name"  FROM `products`;
+
+
+///////concatenation ///////////
+SELECT concat(products.product_code,'-',products.product_name) as "Description", products.product_id as 'ID'  FROM `products`;
+#if null it gives null
+
+/////////Distinct Clause////////////////
+#removes duplicate and gives first value from duplicates column values, consider null value;
+
+SELECT  DISTINCT product_price product_name  FROM `products`;
+
+////////////Group BY///////////
+The GROUP BY clause groups rows based on the values in a specific column and returns only one row for each unique value.
+
+SELECT *  FROM `products` GROUP BY product_price;
+
+
+//////Having clause use with group by///////////
+
+SELECT product_id as "ID", product_code as "Code", product_name as 'Name', product_quantity as 'Quantity' , product_price as "price", COUNT(*) as 'count' from products GROUP BY product_code HAVING count>2;
+
