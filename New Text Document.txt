@@ -91,3 +91,27 @@ SELECT *  FROM `products` GROUP BY product_price;
 
 SELECT product_id as "ID", product_code as "Code", product_name as 'Name', product_quantity as 'Quantity' , product_price as "price", COUNT(*) as 'count' from products GROUP BY product_code HAVING count>2;
 
+
+//////////// UPDATE///////////////
+update products set product_price=30 where product_id=103;
+# if not use where it will change all coloumn values
+
+/////////////Delete///////////////////////////
+DELETE FROM products where product_id=103;
+
+
+//////////Alter Table////////////////
+# for delete column
+ALTER table products DROP COLUMN order_id; 
+ALTER table products ADD COLUMN order_id;
+ALTER table products Change COlumn order_id  orderno int;
+
+
+//////////Rename/////////////////////////////
+ALTER table products Rename To products_master
+
+
+//////////Forigen Key//////////////////////////
+ALTER table products ADD COLUMN supplier_id;
+UPDATE products_master SET supplier_id=1;
+ALTER TABLE products_master ADD FOREIGN KEY(supplier_id) REFERENCES supplier(supplier_id);
