@@ -115,3 +115,54 @@ ALTER table products Rename To products_master
 ALTER table products ADD COLUMN supplier_id;
 UPDATE products_master SET supplier_id=1;
 ALTER TABLE products_master ADD FOREIGN KEY(supplier_id) REFERENCES supplier(supplier_id);
+
+
+//////////// joins//////////////////
+
+CREATE TABLE orders(order_id int unsigned not null AUTO_INCREMENT, order_name varchar(255) not null, company varchar(255) not null, PRIMARY key(order_id));
+
+
+CREATE TABLE products(product_id int unsigned not null AUTO_INCREMENT,product_name varchar(255) not null, productCode char(5) not null,product_price decimal(10,2),order_id int unsigned not null, PRIMARY key(product_id), CONSTRAINT fk_order FOREIGN KEY(order_id) REFERENCES orders(order_id));
+
+for product table
+INSERT INTO products VALUES (101,"greenMarker",'mark',25,1),(null,"redMarker",'mark',25,1),(null,"blueMarker",'mark',30,2),(null,"Inkpen",'pen',50,2),(null,"ballpen",'pen',15,2),(null,"pointer",'point',20,2),(null,"pencil",'penc',10,3),(null,"Bluepencil",'penc',15,3),
+(null,"Greenpencil",'penc',20,3);
+
+
+for orders table
+INSERT INTO orders VALUES(1,"mark","abc"),(2,"pen","xyz"),(3,"penc","def")
+
+1-inner join or join
+SELECT * from products JOIN orders on products.order_id=orders.order_id;
+
+SELECT * from products JOIN orders on products.order_id=orders.order_id WHERE orders.order_id=1;
+
+
+2-left join
+SELECT *
+FROM products
+LEFT JOIN orders
+ON products.order_id = orders.order_id;
+
+
+3-Right Join
+SELECT *
+FROM products
+right JOIN orders
+ON products.order_id = orders.order_id;
+
+
+4-full join
+SELECT *
+FROM products
+LEFT JOIN orders
+ON products.order_id = orders.order_id
+UNION ALl
+SELECT *
+FROM products
+right JOIN orders
+ON products.order_id = orders.order_id   WHERE products.product_id IS null;
+
+5- cross join
+SELECT *
+FROM products cross join orders
