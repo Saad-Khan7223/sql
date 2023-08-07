@@ -178,4 +178,22 @@ The columns in every SELECT statement must also be in the same order
 The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL:
 
 
+////////////Sub Query////////////////
+Insert Operation
+
+INSERT INTO karachi_std (std_id, std_name)
+SELECT students.std_id, students.std_name
+FROM students
+WHERE students.city_id = (
+    SELECT city.city_id
+    FROM city
+    WHERE city.city_name = 'karachi'
+);
+Delete Sub Query
+DELETE from students WHERE students.city_id=(SELECT city.city_id FROM city where city.city_name="Islamabad")
+
+Update sub Query
+UPDATE students set students.std_name="Wamiq" where students.std_id=(SELECT city_id from city where city.city_name="multan")
+
+
 
