@@ -215,5 +215,26 @@ SELECT records.fname ,records.lname,records.class,records.marks, grade(records.m
 
 
 
+/////////////////////Stored Procedure////////////////////////////////////
+DELIMITER//
+CREATE PROCEDURE view_records()
+BEGIN
+SELECT * FROM records
+END//
+
+DELIMITER//
+CREATE PROCEDURE view_records()
+BEGIN
+SELECT * FROM records
+END//
+
+call view_records();
+
+CREATE PROCEDURE insertdata(IN id int unsigned,IN fname varchar(50),IN lname varchar(50),IN class varchar(50), IN age int, IN marks int )
+BEGIN
+INSERT INTO records values (id,fname,lname,class,age,marks);
+END;
+
+CALL insertdata(4,"ALi","Sheikh","two",10,60);
 
 
