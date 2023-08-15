@@ -238,3 +238,57 @@ END;
 CALL insertdata(4,"ALi","Sheikh","two",10,60);
 
 
+
+///////////// My SQL Trigger/////////////////////////////////
+trigger is a procedure but it is invoked by automatically
+
+Types of trigger
+
+after/before insert
+after/before update
+after/before delete
+
+Syntax
+
+DELIMETER //
+
+Create Trigger trigger_name
+{Before | After }
+{Insert | Update | Delete}
+
+on table_name
+
+FOR Each Row trigger_body;
+
+
+CREATE table std_marks(id int unsigned not null AUTO_INCREMENT, name varchar(255), m1 int ,m2 int ,m3 int, total int, Primary Key(id));
+
+DELIMITER //
+CREATE TRIGGER total 
+BEFORE INSERT
+ON std_marks
+FOR EACH ROW
+BEGIN SET
+new.total=new.m1+new.m2+new.m3;
+END  //
+
+CREATE TABLE marks2(id int NOT null AUTO_INCREMENT,s_id int, sum int,PRIMARY key(id))
+
+CREATE TRIGGER add_in_marks2
+AFTER INSERT
+ON std_marks
+FOR EACH ROW
+BEGIN 
+	INSERT INTO marks2 values (1001,new.id,new.total);
+    END;
+
+CREATE TRIGGER del
+AFTER DELETE
+ON std_marks
+FOR EACH ROW
+BEGIN 
+DELETE FROM marks2 where marks2.s_id=old.id;
+END;
+
+
+
